@@ -32,11 +32,6 @@ const Home: NextPage = () => {
     }
   }
 
-  const logOut = async () => {
-    await logout();
-    console.log("logged out");
-  }
-
   return (
     <div className={styles.container}>
       <Head>
@@ -46,26 +41,28 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        <div>
-          <h1>Moralis Hello World!</h1>
-          <Button title='MetMask' image={MetaMaskIcon} onClick={() => login('metamask')} />
-          <Button title='Wallet Connect' image={WalletConnectIcon} onClick={() => login('walletconnect')} />
+        <h1>Moralis Hello World! Web3</h1>
 
+        <div className={styles.loginContainer}>
+          {!isAuthenticated && <>
+            <Button className='loginButton' title='Login  Metamask' image={MetaMaskIcon} onClick={() => login('metamask')} />
+            <Button className='loginButton' title='Login Wallet Connect' image={WalletConnectIcon} onClick={() => login('walletconnect')} />
+          </>}
+          {isAuthenticated && <>
+            <Button className='loginButton' title='Logout' onClick={logout} />
+          </>}
         </div>
-      </main>
-
-      <footer className={styles.footer}>
+        <div className={styles.powered}></div>
         <a
           href="https://www.linkedin.com/in/agitt"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{" "}
-          <span className={styles.logo}>
-            Agit Isik
+          Powered by{" "}<span className={styles.logo}>Agit Isik
           </span>
         </a>
-      </footer>
+      </main>
+
     </div>
   );
 };

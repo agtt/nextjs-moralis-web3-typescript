@@ -1,7 +1,7 @@
-import { ImageProps } from 'next/image';
 export type ButtonProps = {
     title: string,
-    image: ImageProps,
+    image?: string,
     children?: JSX.Element,
     onClick: () => void,
+    className?: string,
 };
