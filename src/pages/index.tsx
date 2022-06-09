@@ -1,17 +1,24 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-import MetaMaskIcon from 'icons/metamask.svg';
-import WalletConnectIcon from 'icons/walletconnect.svg';
+import MetaMaskIcon from "icons/metamask.svg";
+import WalletConnectIcon from "icons/walletconnect.svg";
 
 import { useMoralis } from "react-moralis";
-import { Button } from 'components/Button';
+import { Button } from "components/Button";
 
-type LoginProvider = 'metamask' | 'walletconnect' | undefined;
+type LoginProvider = "metamask" | "walletconnect" | undefined;
 
 const Home: NextPage = () => {
-  const { authenticate, isAuthenticated, isAuthenticating, user, account, logout } = useMoralis();
+  const {
+    authenticate,
+    isAuthenticated,
+    isAuthenticating,
+    user,
+    account,
+    logout,
+  } = useMoralis();
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -21,7 +28,10 @@ const Home: NextPage = () => {
 
   const login = async (provider: LoginProvider) => {
     if (!isAuthenticated) {
-      await authenticate({ signingMessage: "Log in using Moralis", provider: provider })
+      await authenticate({
+        signingMessage: "Log in using Moralis",
+        provider: provider,
+      })
         .then(function (user) {
           console.log("logged in user:", user);
           console.log(user!.get("ethAddress"));
@@ -30,7 +40,7 @@ const Home: NextPage = () => {
           console.log(error);
         });
     }
-  }
+  };
 
   return (
     <div className={styles.container}>
@@ -44,13 +54,27 @@ const Home: NextPage = () => {
         <h1>Moralis Hello World! Web3</h1>
 
         <div className={styles.loginContainer}>
-          {!isAuthenticated && <>
-            <Button className='loginButton' title='Login  Metamask' image={MetaMaskIcon} onClick={() => login('metamask')} />
-            <Button className='loginButton' title='Login Wallet Connect' image={WalletConnectIcon} onClick={() => login('walletconnect')} />
-          </>}
-          {isAuthenticated && <>
-            <Button className='loginButton' title='Logout' onClick={logout} />
-          </>}
+          {!isAuthenticated && (
+            <>
+              <Button
+                className="loginButton"
+                title="Login  Metamask"
+                image={MetaMaskIcon}
+                onClick={() => login("metamask")}
+              />
+              <Button
+                className="loginButton"
+                title="Login Wallet Connect"
+                image={WalletConnectIcon}
+                onClick={() => login("walletconnect")}
+              />
+            </>
+          )}
+          {isAuthenticated && (
+            <>
+              <Button className="loginButton" title="Logout" onClick={logout} />
+            </>
+          )}
         </div>
         <div className={styles.powered}></div>
         <a
@@ -58,11 +82,9 @@ const Home: NextPage = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{" "}<span className={styles.logo}>Agit Isik
-          </span>
+          Powered by <span className={styles.logo}>Agit Isik</span>
         </a>
       </main>
-
     </div>
   );
 };
