@@ -51,7 +51,7 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        <h1>Moralis Hello World! Web3</h1>
+        <h1>Moralis Hello World!</h1>
 
         <div className={styles.loginContainer}>
           {!isAuthenticated && (
