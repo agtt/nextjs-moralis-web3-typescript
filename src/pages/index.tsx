@@ -52,7 +52,7 @@ const Home: NextPage = () => {
 
       <main className={styles.main}>
         <h1>Moralis Hello World!</h1>
-
+        {isAuthenticated && (<span>Login Id :{user!.get("ethAddress")}</span>)}
         <div className={styles.loginContainer}>
           {!isAuthenticated && (
             <>
@@ -71,9 +71,7 @@ const Home: NextPage = () => {
             </>
           )}
           {isAuthenticated && (
-            <>
-              <Button className="loginButton" title="Logout" onClick={logout} />
-            </>
+            <Button className="loginButton" title="Logout" onClick={logout} />
           )}
         </div>
         <div className={styles.powered}></div>
